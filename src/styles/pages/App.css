@@ -36,3 +36,6 @@
 #tab-bar .demo-preview-item .am-tab-bar {
   background-color: white;
 }
+.am-tabs-tab-bar-wrap {
+  margin-bottom: 78px;
+}

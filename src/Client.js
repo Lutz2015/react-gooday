@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './styles/pages/App.css';
-import { Router, Route,Switch } from 'react-router';
+import { Router, Route,Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory'
 const history = createHistory();
 history.listen(location => {
