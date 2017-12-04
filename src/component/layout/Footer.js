@@ -1,127 +1,50 @@
 import React from 'react';
 import {TabBar} from 'antd-mobile';
-// import {Link} from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory'
-
-const history = createHistory();
-class Footer extends React.Component {
+import {Link} from 'react-router-dom';
+import routes from '../../router/routes';
+class Footer extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            selectedTab: 'redTab',
+            selectedTab: 'home',
             hidden: false
         };
     }
-
     render() {
         return (
-
-        <div style={{ position: 'fixed', height: '100%', width: '100%', bottom: 0 }}>
+        <div style={{ position: 'fixed', height: 'auto', width: '100%', bottom: 0 }}>
             <TabBar
                 unselectedTintColor="#949494"
                 tintColor="#33A3F4"
                 barTintColor="white"
                 hidden={this.state.hidden}
             >
-                <TabBar.Item
-                    title="Life"
-                    key="Life"
-                    icon={<div style={{
-                        width: '22px',
-                        height: '22px',
-                        background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
-                    />
-                    }
-                    selectedIcon={<div style={{
-                        width: '22px',
-                        height: '22px',
-                        background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
-                    />
-                    }
-                    selected={this.state.selectedTab === 'blueTab'}
-                    badge={1}
-                    onPress={() => {
-                        history.push('/Life')
-                        this.setState({
-                            selectedTab: 'blueTab',
-                        });
-                    }}
-                    data-seed="logId"
-                >
-                    {this.props.children}
-                </TabBar.Item>
-                <TabBar.Item
-                    icon={
-                        <div style={{
+                {routes.map((route, index) => (
+                    <TabBar.Item
+                        title={route.title}
+                        key={route.key}
+                        icon={<Link to={route.path} style={{
+                            display: 'block',
                             width: '22px',
                             height: '22px',
-                            background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat' }}
-                        />
-                    }
-                    selectedIcon={
-                        <div style={{
+                            background: `url(${route.icon}) center center /  21px 21px no-repeat`}}
+                        />}
+                        selectedIcon={<Link to={route} style={{
+                            display: 'block',
                             width: '22px',
                             height: '22px',
-                            background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat' }}
-                        />
-                    }
-                    title="Koubei"
-                    key="Koubei"
-                    badge={'new'}
-                    selected={this.state.selectedTab === 'redTab'}
-                    onPress={() => {
-                        this.setState({
-                            selectedTab: 'redTab',
-                        });
-                        history.push('/koubei')
-                    }}
-                    data-seed="logId1"
-                >
-                    {this.props.children}
-                </TabBar.Item>
-                <TabBar.Item
-                    icon={
-                        <div style={{
-                            width: '22px',
-                            height: '22px',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat' }}
-                        />
-                    }
-                    selectedIcon={
-                        <div style={{
-                            width: '22px',
-                            height: '22px',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat' }}
-                        />
-                    }
-                    title="Friend"
-                    key="Friend"
-                    dot
-                    selected={this.state.selectedTab === 'greenTab'}
-                    onPress={() => {
-                        this.setState({
-                            selectedTab: 'greenTab',
-                        });
-                        history.push('/friend')
-                    }}
-                >
-                    {this.props.children}
-                </TabBar.Item>
-                <TabBar.Item
-                    icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-                    selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
-                    title="My"
-                    key="my"
-                    selected={this.state.selectedTab === 'yellowTab'}
-                    onPress={() => {
-                        this.setState({
-                            selectedTab: 'yellowTab',
-                        });
-                        history.push('/my')
-                    }}
-                >
-                    {this.props.children}
-                </TabBar.Item>
+                            background: `url(${route.activeIcon}) center center /  21px 21px no-repeat`}}
+                        />}
+                        selected={this.state.selectedTab === route.key}
+                        badge={1}
+                        onPress={() => {
+                            this.setState({
+                                selectedTab: route.key,
+                            });
+                        }}
+                    >
+                    </TabBar.Item>
+                ))}
             </TabBar>
         </div>
         );

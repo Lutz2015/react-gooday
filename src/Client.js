@@ -1,40 +1,24 @@
 import React, { Component } from 'react';
 import './styles/pages/App.css';
-import { Router, Route,Switch } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory'
-const history = createHistory();
-history.listen(location => {
-    console.log('path:',location.pathname) // /home
-})
-function Friend() {
-    return <div>Friend</div>
-}
-function Kou() {
-    return <div>Kou</div>
-}
-function Life() {
-    return <div>Life</div>
-}
-function My() {
-    return <div>My</div>
-}
-function scrollToTop() {
-    window.scrollTo(0, 0);
-}
+import routes from './router/routes';
+import {Route} from 'react-router-dom';
 class Client extends Component {
   render() {
     return (
-    <Router onUpdate={scrollToTop} history={history}>
-        <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
-            <div style={{ paddingTop: 60 }}>Clicked  tab， show information</div>
-            <Switch>
-                <Route path="/friend" component={Friend} />
-                <Route path="/koubei" component={Kou} />
-                <Route path="/my" component={My} />
-                <Route path="/Life" component={Life} />
-            </Switch>
+        <div style={{ display: 'flex',marginTop: '3rem',height: '400px',width:'100%'}}>
+            <div style={{
+                padding: '10px',
+                width: '100%',
+                background: '#f5f5f9'
+            }}>
+                {routes.map((route, index) => (
+                <Route
+                path={route.path}
+                exact={route.exact}
+                component={route.main}
+                />))}
+            </div>
         </div>
-    </Router>
     );
   }
 }
