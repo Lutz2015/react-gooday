@@ -6,7 +6,7 @@ class Footer extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            selectedTab: 'home',
+            selectedTab:  window.location.href.split('3000/')[1],
             hidden: false
         };
     }
@@ -36,10 +36,10 @@ class Footer extends React.PureComponent {
                             background: `url(${route.activeIcon}) center center /  21px 21px no-repeat`}}
                         />}
                         selected={this.state.selectedTab === route.key}
-                        badge={1}
+                        badge={route.badge}
                         onPress={() => {
                             this.setState({
-                                selectedTab: route.key,
+                                selectedTab: window.location.href.split('3000/')[1],
                             });
                         }}
                     >
