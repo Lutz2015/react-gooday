@@ -1,5 +1,4 @@
 import React from 'react';
-import Broadcast from '../app/Broadcast';
 import Group from '../app/Group';
 import Mine from '../app/Mine';
 import Home from '../app/Home';
